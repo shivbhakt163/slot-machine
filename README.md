@@ -14,3 +14,6 @@ module and a bit of tkinter and i've even added certain features to add the reco
 AUTHOR - Aryan Saraswat
                                                                                                                                                      
 🔱 JAI SHREE MAHAKAL 🔱            
+<br>
+Here are some of the screenshots of the game : 
+<br>
