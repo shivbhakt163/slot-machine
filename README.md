@@ -54,5 +54,9 @@ NOTE : RECORDS CAN BE VIEWED BY ACCESSING THE RESPECTIVE SQL-DATABASE ASSOCIATED
 ## AUTHOR - ARYAN SARASWAT
 ## 🔱 JAI SHREE MAHAKAL 🔱
 <br>
+<br>
 
+edit : i updated the interface and added a little bit of colours to it, so the new interface looks like
+![image](https://github.com/shivbhakt163/slot-machine/assets/153621570/1204ebb4-d84e-4b6f-9b5d-5ae5ee139ea3)
+<br>
 
