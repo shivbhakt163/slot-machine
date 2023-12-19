@@ -18,9 +18,9 @@ from PIL import Image, ImageTk
 import pygame
 
 db = mysql.connector.connect(
-    host="localhost",
-    user="root",
-    password="3141592653589793",
+    host="host_type",
+    user="usrname",
+    password="pwd",
     database="slot_machine"
 )
 cursor = db.cursor()
@@ -74,9 +74,9 @@ def check_result():
         play_soundwin()
         messagebox.showinfo("Congratulations!", f"Yay, {name}! You have a matching case, and your bet is doubled: rupees {(bet_amt)*2}")
         result_label.config(text = "congratulations! , you have a matching case so you bet will increase and doubled", font=("Arial", 27))
-        db = mysql.connector.connect(host = "localhost",
-                                     user = "root",
-                                     password = "3141592653589793",
+        db = mysql.connector.connect(host = "host_type",
+                                     user = "usrname",
+                                     password = "pwd",
                                      database = "slot_machine")
         cursor1 = db.cursor()
         update_query = f"UPDATE slot_machine_records SET rounds_won = rounds_won + 1 WHERE phone_number = '{phone_number}'"
