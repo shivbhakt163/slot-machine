@@ -1,6 +1,13 @@
 '''
 some of the additional symbols are also given in case you want to add extra symbols.
 --> sym = ['🍒','🍌','🍇','🍉','🍏']
+the structure of the database should be like :
++--------+-----+---------------+-----------+--------------+----------------+--------------+
+| name   | age | phone_number  | consent   | bet_amount   | agreed_rules   | rounds_won   |
++--------+-----+---------------+-----------+--------------+----------------+--------------+
+| string | int | string_type   | boolean   | integer_type | boolean        | int, def=0   |
++--------+-----+---------------+-----------+--------------+----------------+--------------+
+where def is default value of the column.
 '''
 import tkinter as tk
 from tkinter import messagebox
@@ -11,40 +18,39 @@ from PIL import Image, ImageTk
 import pygame
 
 db = mysql.connector.connect(
-    host="host",
-    user="userid",
-    password="password",
+    host="localhost",
+    user="root",
+    password="3141592653589793",
     database="slot_machine"
 )
 cursor = db.cursor()
-#table which stores the records is named to be slot_machine_records
+
 def register_player(name, age, phone_number, consent, bet_amount, agreed_rules):
     cursor.execute("INSERT INTO slot_machine_records (name, age, phone_number, consent, bet_amount, agreed_rules) VALUES (%s, %s, %s, %s, %s, %s)",
                    (name, age, phone_number, consent, bet_amount, agreed_rules))
     db.commit()
-#you may add more sound effects as per your requirements but you can also use the sounds i gave you and use them
 def play_sound2():
-    sound_path = r"C:\add_your_path_to\mixkit-slot-machine-wheel-1932.wav"
+    sound_path = r"path_to_this_sound\mixkit-slot-machine-wheel-1932.wav"
     pygame.mixer.init()
     pygame.mixer.music.load(sound_path)
     pygame.mixer.music.play()
 def play_sound1():
-    sound_path = r"C:\add_your_path_to\mixkit-positive-interface-beep-221.wav"
+    sound_path = r"path_to_this_sound\mixkit-positive-interface-beep-221.wav"
     pygame.mixer.init()
     pygame.mixer.music.load(sound_path)
     pygame.mixer.music.play()
 def play_soundwin():
-    sound_path = r"C:\add_your_path_to\mixkit-slot-machine-win-siren-1929.wav"
+    sound_path = r"path_to_this_sound\mixkit-slot-machine-win-siren-1929.wav"
     pygame.mixer.init()
     pygame.mixer.music.load(sound_path)
     pygame.mixer.music.play()
 def play_soundlose():
-    sound_path = r"C:\add_your_path_to\mixkit-retro-arcade-lose-2027.wav"
+    sound_path = r"path_to_this_sound\mixkit-retro-arcade-lose-2027.wav"
     pygame.mixer.init()
     pygame.mixer.music.load(sound_path)
     pygame.mixer.music.play()
 def play_sounderror():
-    sound_path = r"C:\add_your_path_to\mixkit-losing-marimba-2025.wav"
+    sound_path = r"path_to_this_sound\mixkit-losing-marimba-2025.wav"
     pygame.mixer.init()
     pygame.mixer.music.load(sound_path)
     pygame.mixer.music.play()  
@@ -66,12 +72,12 @@ def check_result():
     result = spin()
     if len(set(result)) == 1:
         play_soundwin()
-        messagebox.showinfo("Congratulations!", f"Yay, {name}! You have a matching case, and your bet is doubled: currency {(bet_amt)*2}") #make sure to change the currency as per your region and country
+        messagebox.showinfo("Congratulations!", f"Yay, {name}! You have a matching case, and your bet is doubled: rupees {(bet_amt)*2}")
         result_label.config(text = "congratulations! , you have a matching case so you bet will increase and doubled", font=("Arial", 27))
-        db = mysql.connector.connect(host = "host",
-                                     user = "userid",
-                                     password = "your_password",
-                                     database = "slot_machine") #you change the database name as per your wish.
+        db = mysql.connector.connect(host = "localhost",
+                                     user = "root",
+                                     password = "3141592653589793",
+                                     database = "slot_machine")
         cursor1 = db.cursor()
         update_query = f"UPDATE slot_machine_records SET rounds_won = rounds_won + 1 WHERE phone_number = '{phone_number}'"
         cursor1.execute(update_query)
@@ -88,7 +94,7 @@ def start_game():
     phn_no = phn_number_entry.get()
     play_sound1()
     if bet_amt <= 0:
-        messagebox.showwarning("Invalid Bet", "Please enter a valid bet amount to play the game.")
+        messagebox.showwarning("Invalid Bet", "Please enter a valid bet amount.")
         play_sounderror()
         return
 
@@ -109,8 +115,8 @@ def register_user():
     consent_var = tk.IntVar()
     rules_var = tk.IntVar()
 
-    consent_checkbutton = tk.Checkbutton(register_window, text="I am playing with my will and any kind of loss is upto me", variable=consent_var)
-    rules_checkbutton = tk.Checkbutton(register_window, text="I agree to follow all the rules of the game and will play fair and square without any kind of cheating.", variable=rules_var)
+    consent_checkbutton = tk.Checkbutton(register_window, text="I am playing with my will and i will be held\nresponsible for any kind of loss, financial especially", variable=consent_var)
+    rules_checkbutton = tk.Checkbutton(register_window, text="I agree to follow all the rules of the game as told by the instructor\nAnd will play fair and square, without any kind of cheating or fraud", variable=rules_var)
 
     name_entry = tk.Entry(register_window)
     age_entry = tk.Entry(register_window)
@@ -133,7 +139,7 @@ def register_user():
         messagebox.showinfo("Registration Successful", "You have successfully registered!")
         register_window.destroy()
 
-    submit_button = tk.Button(register_window, text="Submit", foreground="blue", command=submit_registration) 
+    submit_button = tk.Button(register_window, text="Submit", foreground="blue", command=submit_registration)
 
     name_label.pack(pady=5)
     name_entry.pack(pady=5)
@@ -148,35 +154,35 @@ def register_user():
     submit_button.pack(pady=10)
 
 if __name__ == '__main__':
-    sym = ['🍒','🍌','🍇']
+    sym = ['🍒','🍉','🍏','⑦']
     
     root = tk.Tk()
-    root.title("SLOT_MACHINE") #change the name to your desired name of your file
-    root.geometry("1920x1080") #adjust as per your screen size
+    root.title("SlotSaFari")
+    root.geometry("1920x1080")
 
-    icon_image = ImageTk.PhotoImage(file=r"path_to_your_icon_image") #make sure your image is in png format
+    icon_image = ImageTk.PhotoImage(file=r"path_to_this_icon_file\—Pngtree—triple number seven diamond for_6635671.png")
     root.iconphoto(True, icon_image)
-    
-    bg = ImageTk.PhotoImage(file = "path_to_your_background_image" ) #make sure to provide the path to png or other supported files
+
+    bg = ImageTk.PhotoImage(file = "path_to_this_background_image\\desktop-wallpaper-pin-on-casino-slot-games-slot-game.jpg" )
     label1 = tk.Label(root, image=bg)
     label1.place(x=0, y=0, relwidth=1, relheight=1)
 
-    name_label = tk.Label(root, text="       Enter your name ↓       ", font=("Arial", 26))
-    name_entry = tk.Entry(root, font=("Arial", 26), width=25)
-    #make sure to put in the correct phone number cause if there will be a difference in the phone number so your check_result will fail and this code will get screwed up
-    phn_number_label = tk.Label(root, text=" Enter the phone number ↓ ", font=("Arial", 26))
-    phn_number_entry = tk.Entry(root, font=("Arial",26), width=25)
+    name_label = tk.Label(root, text="       Enter your name ↓       ", background = '#FFD700',font=("Arial", 26))
+    name_entry = tk.Entry(root, font=("Arial", 26), background = '#fdfd96', width=25)
 
-    bet_amt_label = tk.Label(root, text="    Enter the bet amount ↓    ", font=("Arial", 26))
-    bet_amt_entry = tk.Entry(root, font=("Arial", 26), width=25)
+    phn_number_label = tk.Label(root, text=" Enter the phone number ↓ ", background = '#FFD700',font=("Arial", 26))
+    phn_number_entry = tk.Entry(root, font=("Arial",26), background = '#fdfd96', width=25)
 
-    start_game_button = tk.Button(root, text="Start Game", foreground="blue", command=start_game, font=("Arial", 24), width=25, height=1)
-    check_result_button = tk.Button(root, text="Check Result", foreground="red", command=check_result, state=tk.DISABLED, font=("Arial", 24), width=25, height=1)
+    bet_amt_label = tk.Label(root, text="    Enter the bet amount ↓    ", background = '#FFD700',font=("Arial", 26))
+    bet_amt_entry = tk.Entry(root, font=("Arial", 26), background = '#fdfd96', width=25)
 
-    display_label = tk.Label(root, text="", font=("Arial", 80), fg="blue")
-    result_label = tk.Label(root, text="", fg="red", font=("Arial", 35))
+    start_game_button = tk.Button(root, text="Start Game", background = '#880808',foreground="#FFD700", command=start_game, font=("Arial", 24), width=25, height=1)
+    check_result_button = tk.Button(root, text="Check Result", background = '#880808',foreground="#FFD700", command=check_result, state=tk.DISABLED, font=("Arial", 24), width=25, height=1)
 
-    register_button = tk.Button(root, text="Register", foreground="red", command=register_user, font=("Arial", 24), width=25, height=1)
+    display_label = tk.Label(root, text="", font=("Arial", 80), background = '#fdfd96', fg="#880808")
+    result_label = tk.Label(root, text="", bg = '#FFD700',fg="red", font=("Arial", 35))
+
+    register_button = tk.Button(root, text="Register", background = '#880808',foreground="#FFD700", command=register_user, font=("Arial", 24), width=25, height=1)
     register_button.pack(pady=10)
 
     name_label.pack(pady=5)
