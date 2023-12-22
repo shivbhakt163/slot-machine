@@ -30,27 +30,27 @@ def register_player(name, age, phone_number, consent, bet_amount, agreed_rules, 
                    (name, age, phone_number, consent, bet_amount, agreed_rules, customer_id))
     db.commit()
 def play_sound2():
-    sound_path = r"C:\Users\Aashi\Desktop\slot machine\sound_files\mixkit-slot-machine-wheel-1932.wav"
+    sound_path = r"path_to_\mixkit-slot-machine-wheel-1932.wav"
     pygame.mixer.init()
     pygame.mixer.music.load(sound_path)
     pygame.mixer.music.play()
 def play_sound1():
-    sound_path = r"C:\Users\Aashi\Desktop\slot machine\sound_files\mixkit-positive-interface-beep-221.wav"
+    sound_path = r"path_to_\mixkit-positive-interface-beep-221.wav"
     pygame.mixer.init()
     pygame.mixer.music.load(sound_path)
     pygame.mixer.music.play()
 def play_soundwin():
-    sound_path = r"C:\Users\Aashi\Desktop\slot machine\sound_files\mixkit-slot-machine-win-siren-1929.wav"
+    sound_path = r"path_to_\mixkit-slot-machine-win-siren-1929.wav"
     pygame.mixer.init()
     pygame.mixer.music.load(sound_path)
     pygame.mixer.music.play()
 def play_soundlose():
-    sound_path = r"C:\Users\Aashi\Desktop\slot machine\sound_files\mixkit-retro-arcade-lose-2027.wav"
+    sound_path = r"path_to_\mixkit-retro-arcade-lose-2027.wav"
     pygame.mixer.init()
     pygame.mixer.music.load(sound_path)
     pygame.mixer.music.play()
 def play_sounderror():
-    sound_path = r"C:\Users\Aashi\Desktop\slot machine\sound_files\mixkit-losing-marimba-2025.wav"
+    sound_path = r"path_to_\mixkit-losing-marimba-2025.wav"
     pygame.mixer.init()
     pygame.mixer.music.load(sound_path)
     pygame.mixer.music.play()  
@@ -173,10 +173,10 @@ if __name__ == '__main__':
     root.title("SlotSaFari")
     root.geometry("1920x1080")
 
-    icon_image = ImageTk.PhotoImage(file=r"C:\Users\Aashi\Desktop\slot machine\icons\—Pngtree—triple number seven diamond for_6635671.png")
+    icon_image = ImageTk.PhotoImage(file=r"path_to_\—Pngtree—triple number seven diamond for_6635671.png")
     root.iconphoto(True, icon_image)
 
-    bg = ImageTk.PhotoImage(file = "C:\\Users\\Aashi\\Desktop\\slot machine\\slot_machine_bgimgs\\desktop-wallpaper-pin-on-casino-slot-games-slot-game.jpg" )
+    bg = ImageTk.PhotoImage(file = "path_to_\\desktop-wallpaper-pin-on-casino-slot-games-slot-game.jpg" )
     label1 = tk.Label(root, image=bg)
     label1.place(x=0, y=0, relwidth=1, relheight=1)
 
